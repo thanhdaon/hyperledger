@@ -2,6 +2,7 @@ package chaincode
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
@@ -192,4 +193,28 @@ func (s *SmartContract) GetAllAssets(ctx contractapi.TransactionContextInterface
 	}
 
 	return assets, nil
+}
+
+func (s *SmartContract) GetFirstAsset(ctx contractapi.TransactionContextInterface) (Asset, error) {
+	iterator, err := ctx.GetStub().GetStateByRange("", "")
+	if err != nil {
+		return Asset{}, err
+	}
+
+	for iterator.HasNext() {
+		response, err := iterator.Next()
+		if err != nil {
+			return Asset{}, err
+		}
+
+		var ret Asset
+
+		if err := json.Unmarshal(response.Value, &ret); err != nil {
+			return Asset{}, err
+		}
+
+		return ret, nil
+	}
+
+	return Asset{}, errors.New("there are no asset!")
 }

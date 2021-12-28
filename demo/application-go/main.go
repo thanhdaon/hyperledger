@@ -60,7 +60,7 @@ func main() {
 
 	// log.Println("--> Evaluate Transaction: GetAllAssets, function returns all the current assets on the ledger")
 
-	result, err := contract.EvaluateTransaction("GetAllAssets")
+	result, err := contract.EvaluateTransaction("GetFirstAsset")
 	if err != nil {
 		log.Fatalf("Failed to evaluate transaction: %v", err)
 	}
@@ -69,7 +69,7 @@ func main() {
 
 	// log.Println("--> Submit Transaction: CreateAsset, creates new asset with ID, color, owner, size, and appraisedValue arguments")
 	// result, err = contract.SubmitTransaction("CreateAsset", "asset13", "yellow", "5", "Tom", "1300")
-	// if err != nil {
+	// if err != nil {b
 	// 	log.Fatalf("Failed to Submit transaction: %v", err)
 	// }
 	// log.Println(string(result))
