@@ -1,20 +1,20 @@
 package main
 
 import (
+	"fabric-demo/contract"
 	"fabric-demo/ledgerapi"
-	"fabric-demo/phonecard"
 	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
 
 func main() {
-	contract := new(phonecard.Contract)
-	contract.TransactionContextHandler = new(ledgerapi.TransactionContext)
-	contract.Name = "vn.mobifone.phonecard"
-	contract.Info.Version = "0.0.1"
+	ct := new(contract.Contract)
+	ct.TransactionContextHandler = new(ledgerapi.TransactionContext)
+	ct.Name = "vn.mobifone.phonecard"
+	ct.Info.Version = "0.0.1"
 
-	chaincode, err := contractapi.NewChaincode(contract)
+	chaincode, err := contractapi.NewChaincode(ct)
 	if err != nil {
 		panic(fmt.Sprintf("Error creating chaincode: %s", err.Error()))
 	}

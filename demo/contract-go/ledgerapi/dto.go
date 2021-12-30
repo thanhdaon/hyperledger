@@ -2,6 +2,7 @@ package ledgerapi
 
 import (
 	"encoding/json"
+	"fabric-demo/errors"
 	"fabric-demo/phonecard"
 	"time"
 )
@@ -17,6 +18,8 @@ type Phonecard struct {
 }
 
 func toBytes(pc phonecard.Phonecard) ([]byte, error) {
+	const op errors.Op = "ledgerapi.dto.toBytes"
+
 	dto := Phonecard{
 		Code:                 pc.Code(),
 		Activated:            pc.Activated(),
@@ -29,8 +32,34 @@ func toBytes(pc phonecard.Phonecard) ([]byte, error) {
 
 	ret, err := json.Marshal(dto)
 	if err != nil {
-		return nil, err
+		return nil, errors.E(op, err)
 	}
 
 	return ret, nil
+}
+
+func fromBytes(data []byte) (phonecard.Phonecard, error) {
+	const op errors.Op = "ledgerapi.dto.fromBytes"
+
+	var dto Phonecard
+
+	if err := json.Unmarshal(data, &dto); err != nil {
+		return phonecard.Nil, errors.E(op, err)
+	}
+
+	pc, err := phonecard.FromPersistenceLayer(
+		dto.Code,
+		dto.Activated,
+		dto.ActivatedPhoneNumber,
+		dto.FaceValue,
+		dto.IssuedAt,
+		dto.ActivatedAt,
+		dto.ExpiredAt,
+	)
+
+	if err != nil {
+		return phonecard.Nil, errors.E(op, err)
+	}
+
+	return pc, nil
 }

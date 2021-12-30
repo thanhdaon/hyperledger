@@ -1,6 +1,7 @@
 package ledgerapi
 
 import (
+	"fabric-demo/errors"
 	"fabric-demo/phonecard"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
@@ -11,26 +12,58 @@ type Repsitory struct {
 	name string
 }
 
-func newRepository(ctx contractapi.TransactionContextInterface) Repsitory {
+func NewRepository(ctx contractapi.TransactionContextInterface) Repsitory {
 	return Repsitory{ctx: ctx, name: "vn.mobifone.phonecardlist"}
 }
 
-func (r Repsitory) AddCard(pc phonecard.Phonecard) error {
-	attributes := []string{pc.Code()}
+func (r Repsitory) SaveCard(pc phonecard.Phonecard) error {
+	const op errors.Op = "ledgerapi.Repository.AddCard"
 
-	key, err := r.ctx.GetStub().CreateCompositeKey(r.name, attributes)
+	key, err := r.buildKey(pc.Code())
 	if err != nil {
-		return err
+		return errors.E(op, err)
 	}
 
 	data, err := toBytes(pc)
 	if err != nil {
-		return err
+		return errors.E(op, err)
 	}
 
-	return r.ctx.GetStub().PutState(key, data)
+	if err := r.ctx.GetStub().PutState(key, data); err != nil {
+		return errors.E(op, err)
+	}
+
+	return nil
 }
 
-func (r Repsitory) ActiveCard(code string, phoneNumber string) error {
-	return nil
+func (r Repsitory) FindCardByCode(code string) (phonecard.Phonecard, error) {
+	const op errors.Op = "ledgerapi.Repository.AddCard"
+
+	key, err := r.buildKey(code)
+	if err != nil {
+		return phonecard.Nil, errors.E(op, errors.KNotFound, err)
+	}
+
+	data, err := r.ctx.GetStub().GetState(key)
+	if err != nil {
+		return phonecard.Nil, errors.E(op, err)
+	}
+
+	pc, err := fromBytes(data)
+	if err != nil {
+		return phonecard.Nil, errors.E(op, err)
+	}
+
+	return pc, nil
+}
+
+func (r Repsitory) buildKey(code string) (string, error) {
+	const op errors.Op = "ledgerapi.Repository.buildKey"
+
+	key, err := r.ctx.GetStub().CreateCompositeKey(r.name, []string{code})
+	if err != nil {
+		return "", errors.E(op, err)
+	}
+
+	return key, nil
 }

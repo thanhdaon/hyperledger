@@ -1,19 +1,19 @@
 package ledgerapi
 
 import (
-	"fabric-demo/phonecard"
-
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
 
+var nilRepository = Repsitory{}
+
 type TransactionContext struct {
 	contractapi.TransactionContext
-	repository phonecard.Repository
+	repository Repsitory
 }
 
-func (tc *TransactionContext) GetRepository() phonecard.Repository {
-	if tc.repository == nil {
-		tc.repository = newRepository(tc)
+func (tc *TransactionContext) Repository() Repsitory {
+	if tc.repository == nilRepository {
+		tc.repository = NewRepository(tc)
 	}
 
 	return tc.repository
