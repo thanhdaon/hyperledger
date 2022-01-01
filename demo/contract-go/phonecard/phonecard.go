@@ -18,7 +18,7 @@ type Phonecard struct {
 	expiredAt            time.Time
 }
 
-func New(code string, facevalue int, duration string) (Phonecard, error) {
+func New(code string, facevalue int, duration string, issuedAt time.Time) (Phonecard, error) {
 	const op errors.Op = "phonecard.New"
 
 	if code == "" {
@@ -39,8 +39,8 @@ func New(code string, facevalue int, duration string) (Phonecard, error) {
 		activated:            false,
 		activatedPhoneNumber: "",
 		facevalue:            facevalue,
-		issuedAt:             time.Now(),
-		expiredAt:            time.Now().Add(d),
+		issuedAt:             issuedAt,
+		expiredAt:            issuedAt.Add(d),
 	}, nil
 }
 
@@ -78,10 +78,10 @@ func FromPersistenceLayer(code string, activated bool, phonenumber string, facev
 	}, nil
 }
 
-func (pc *Phonecard) Active(phoneNumber string) {
+func (pc *Phonecard) Active(phoneNumber string, activatedAt time.Time) {
 	pc.activated = true
 	pc.activatedPhoneNumber = phoneNumber
-	pc.activatedAt = time.Now()
+	pc.activatedAt = activatedAt
 }
 
 func (pc *Phonecard) Code() string {

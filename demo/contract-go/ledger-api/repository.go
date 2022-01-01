@@ -3,6 +3,7 @@ package ledgerapi
 import (
 	"fabric-demo/errors"
 	"fabric-demo/phonecard"
+	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
@@ -28,6 +29,8 @@ func (r Repsitory) SaveCard(pc phonecard.Phonecard) error {
 	if err != nil {
 		return errors.E(op, err)
 	}
+
+	fmt.Println(string(data))
 
 	if err := r.ctx.GetStub().PutState(key, data); err != nil {
 		return errors.E(op, err)

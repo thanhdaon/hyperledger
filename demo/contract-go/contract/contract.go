@@ -4,6 +4,7 @@ import (
 	"fabric-demo/errors"
 	"fabric-demo/phonecard"
 	"fmt"
+	"time"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
@@ -19,7 +20,14 @@ func (c *Contract) Instantiate() {
 func (c *Contract) Issue(ctx TransactionContext, code string, facevalue int, duration string) error {
 	const op errors.Op = "Contract.Issue"
 
-	pc, err := phonecard.New(code, facevalue, duration)
+	ts, err := ctx.GetStub().GetTxTimestamp()
+	if err != nil {
+		return errors.E(op, err)
+	}
+
+	issuedAt := time.Unix(ts.Seconds, 0)
+
+	pc, err := phonecard.New(code, facevalue, duration, issuedAt)
 	if err != nil {
 		return errors.E(op, err)
 	}
@@ -39,7 +47,16 @@ func (c *Contract) ActiveCard(ctx TransactionContext, code string, phoneNumber s
 		return errors.E(op, err)
 	}
 
-	pc.Active(phoneNumber)
+	if pc.Activated() {
+		return errors.E(op, errors.KCardActivated, fmt.Errorf("Card already activated"))
+	}
+
+	ts, err := ctx.GetStub().GetTxTimestamp()
+	if err != nil {
+		return errors.E(op, err)
+	}
+
+	pc.Active(phoneNumber, time.Unix(ts.Seconds, 0))
 
 	if err := ctx.Repository().SaveCard(pc); err != nil {
 		return errors.E(op, err)

@@ -5,7 +5,8 @@ type Kind struct {
 }
 
 var (
-	KUnknown  = Kind{}
-	KBadInput = Kind{"bad input"}
-	KNotFound = Kind{"not found"}
+	KUnknown       = Kind{}
+	KBadInput      = Kind{"bad input"}
+	KNotFound      = Kind{"not found"}
+	KCardActivated = Kind{"card already activated"}
 )
