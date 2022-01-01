@@ -2,7 +2,7 @@ package main
 
 import (
 	"fabric-demo/contract"
-	"fabric-demo/ledgerapi"
+	ledgerapi "fabric-demo/ledger-api"
 	"fmt"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"

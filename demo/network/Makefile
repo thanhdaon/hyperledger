@@ -25,8 +25,7 @@ create-channel: export FABRIC_CFG_PATH=$(PWD)/devconfig
 create-channel:
 	configtxgen \
 		-channelID mychannel \
-		-outputCreateChannelTx "$(FABRIC_CFG_PATH)/mychannel.tx" \
-		-outputBlock "$(FABRIC_CFG_PATH)/mychannel.block" \
+		-outputCreateChannelTx $(FABRIC_CFG_PATH)/mychannel.tx \
 		-profile SampleSingleMSPChannel \
 		-configPath $(FABRIC_CFG_PATH)
 
@@ -37,7 +36,7 @@ create-channel:
 
 join-peer: export FABRIC_CFG_PATH=$(PWD)/devconfig
 join-peer:
-	peer channel join -b $(FABRIC_CFG_PATH)/mychannel.block
+	peer channel join -b $(PWD)/mychannel.block
 
 approve-amd-commit-chaincode-definition: export FABRIC_CFG_PATH=$(PWD)/devconfig
 approve-amd-commit-chaincode-definition:
@@ -70,21 +69,33 @@ approve-amd-commit-chaincode-definition:
 		--signature-policy "OR ('SampleOrg.member')" \
 		--peerAddresses 127.0.0.1:7051
 
-chaincode: export FABRIC_CFG_PATH=$(PWD)/devconfig
-chaincode:
+chaincode-invoke: export FABRIC_CFG_PATH=$(PWD)/devconfig
+chaincode-invoke:
 	peer chaincode invoke \
 		--orderer localhost:7050 \
+		--peerAddresses localhost:7051 \
 		--channelID mychannel \
 		--name mycc \
-		--ctor '{"function":"Instantiate","Args":[]}'
+		--ctor '$(ctor)' 
+
+chaincode-query: export FABRIC_CFG_PATH=$(PWD)/devconfig
+chaincode-query:
+	peer chaincode query \
+		--orderer localhost:7050 \
+		--peerAddresses localhost:7051 \
+		--channelID mychannel \
+		--name mycc \
+		--ctor '$(ctor)'
 
 
 clear-dev-env:
 	rm -rf /tmp/hyperledger
-	rm $(PWD)/devconfig/genesisblock
-	rm $(PWD)/devconfig/mychannel.tx
+	rm -f $(PWD)/devconfig/genesisblock
+	rm -f $(PWD)/devconfig/mychannel.block
+	rm -f $(PWD)/devconfig/mychannel.tx
 
 demo: export FABRIC_CFG_PATH=$(PWD)/devconfig
 demo:
-	peer $1
-
+	peer node rollback \
+		--channelID mychannel \
+		--blockNumber 2

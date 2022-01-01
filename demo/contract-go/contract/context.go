@@ -1,7 +1,7 @@
 package contract
 
 import (
-	"fabric-demo/ledgerapi"
+	ledgerapi "fabric-demo/ledger-api"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )

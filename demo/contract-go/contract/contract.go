@@ -13,7 +13,7 @@ type Contract struct {
 }
 
 func (c *Contract) Instantiate() {
-	fmt.Println("Instantiated")
+	fmt.Println("Instantiated Hello")
 }
 
 func (c *Contract) Issue(ctx TransactionContext, code string, facevalue int, duration string) error {
@@ -42,6 +42,27 @@ func (c *Contract) ActiveCard(ctx TransactionContext, code string, phoneNumber s
 	pc.Active(phoneNumber)
 
 	if err := ctx.Repository().SaveCard(pc); err != nil {
+		return errors.E(op, err)
+	}
+
+	return nil
+}
+
+func (c *Contract) GetAllCards(ctx TransactionContext) ([]Phonecard, error) {
+	const op errors.Op = "Contract.GetAllCards"
+
+	phonecards, err := ctx.Repository().FindAllCards()
+	if err != nil {
+		return nil, errors.E(op, err)
+	}
+
+	return toPhonecards(phonecards), nil
+}
+
+func (c *Contract) PruneAllStates(ctx TransactionContext) error {
+	const op errors.Op = "Contract.PruneAllStates"
+
+	if err := ctx.Repository().PruneAllStates(); err != nil {
 		return errors.E(op, err)
 	}
 

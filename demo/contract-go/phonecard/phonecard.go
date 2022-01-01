@@ -59,10 +59,6 @@ func FromPersistenceLayer(code string, activated bool, phonenumber string, facev
 		return Nil, errors.E(op, errors.KBadInput, fmt.Errorf("issuedAt is zero!"))
 	}
 
-	if activatedAt.IsZero() {
-		return Nil, errors.E(op, errors.KBadInput, fmt.Errorf("activatedAt is zero!"))
-	}
-
 	if expiredAt.IsZero() {
 		return Nil, errors.E(op, errors.KBadInput, fmt.Errorf("expiredAt is zero!"))
 	}
