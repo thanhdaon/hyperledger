@@ -20,6 +20,15 @@ func (c *Contract) Instantiate() {
 func (c *Contract) Issue(ctx TransactionContext, code string, facevalue int, duration string) error {
 	const op errors.Op = "Contract.Issue"
 
+	mspID, err := ctx.GetClientIdentity().GetMSPID()
+	if err != nil {
+		return errors.E(op, err)
+	}
+
+	if mspID != "Org1MSP" {
+		return errors.E(op, fmt.Errorf("Permissiondenied"))
+	}
+
 	ts, err := ctx.GetStub().GetTxTimestamp()
 	if err != nil {
 		return errors.E(op, err)
@@ -41,6 +50,15 @@ func (c *Contract) Issue(ctx TransactionContext, code string, facevalue int, dur
 
 func (c *Contract) ActiveCard(ctx TransactionContext, code string, phoneNumber string) error {
 	const op errors.Op = "Contract.ActiveCard"
+
+	mspID, err := ctx.GetClientIdentity().GetMSPID()
+	if err != nil {
+		return errors.E(op, err)
+	}
+
+	if mspID != "Org1MSP" {
+		return errors.E(op, fmt.Errorf("Permissiondenied"))
+	}
 
 	pc, err := ctx.Repository().FindCardByCode(code)
 	if err != nil {

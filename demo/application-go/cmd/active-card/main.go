@@ -12,7 +12,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	_, err = smartcontract.SubmitTransaction("ActiveCard", "102144116655", "0128374483")
+	_, err = smartcontract.SubmitTransaction("ActiveCard", "053328734761", "0128374483")
 	if err != nil {
 		log.Fatalln(err)
 	}
