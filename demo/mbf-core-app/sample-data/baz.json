@@ -1,0 +1,98 @@
+[
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "092439896IgtYRTmUwXOdMTlHIdBL",
+    "calling": "84776798154",
+    "typeCall": "USSD",
+    "desc": "*100*032013509314# \u003d\u003d\u003e TK chinh cua quy khach co 50000 VND.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "092438813fCWB8ANoFriErh9h0DU0",
+    "calling": "84786070253",
+    "typeCall": "USSD",
+    "desc": "*100*069130512037# \u003d\u003d\u003e TK chinh cua quy khach co 103902 VND.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "092440088iCWEBMo7a0gj3UJE6z8m",
+    "calling": "84704708571",
+    "typeCall": "USSD",
+    "desc": "*100*389650182424# \u003d\u003d\u003e TK chinh cua quy khach co 50029 VND.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "013185459B6K1mch3LoVOVkzssupx",
+    "calling": "84934381262",
+    "typeCall": "USSD",
+    "desc": "*100*714824123497# \u003d\u003d\u003e TK chinh cua quy khach co 50000 VND duoc su dung den 23/03/2022.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:15 PM",
+    "idTransaction": "0131833810xodFk6BTuvQevHuzhDv",
+    "calling": "84902237833",
+    "typeCall": "USSD",
+    "desc": "*100*623191494799# \u003d\u003d\u003e TK chinh cua quy khach co 53746 VND duoc su dung den 21/02/2022.",
+    "requestTime": "Dec 23, 2021 3:12:15 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "013187032AISEQ56fAPqQBiix6Be0",
+    "calling": "84906506318",
+    "typeCall": "USSD",
+    "desc": "*100*727200257342# \u003d\u003d\u003e TK chinh cua quy khach co 100019 VND duoc su dung den 21/02/2022.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "013186369e6rPLQlmACRkJN9ctPN8",
+    "calling": "84932592142",
+    "typeCall": "USSD",
+    "desc": "*100*083758651575# \u003d\u003d\u003e TK chinh cua quy khach co 50021 VND duoc su dung den 05/04/2022.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "092445275l0sGQvgT245UqcWTjLNJ",
+    "calling": "84932761787",
+    "typeCall": "USSD",
+    "desc": "*100*957499874557# \u003d\u003d\u003e TK chinh cua quy khach co 103354 VND.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:17 PM",
+    "idTransaction": "013188363ku85j9KA6G9j6sfpY2sl",
+    "calling": "84931371678",
+    "typeCall": "USSD",
+    "desc": "*100*096931582080# \u003d\u003d\u003e Yeu cau cua quy khach da duoc thuc hien thanh cong.",
+    "requestTime": "Dec 23, 2021 3:12:17 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "0131881299zjDBCTXQhq67jlJmwDd",
+    "calling": "84931735546",
+    "typeCall": "USSD",
+    "desc": "*100*021975598910# \u003d\u003d\u003e TK chinh cua quy khach co 54964 VND duoc su dung den 21/02/2022.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:16 PM",
+    "idTransaction": "013187765EK8ciabL5Pp77aGThVOZ",
+    "calling": "84769152911",
+    "typeCall": "USSD",
+    "desc": "*100*665835036504# \u003d\u003d\u003e TK chinh cua quy khach co 100000 VND duoc su dung den 23/03/2022.",
+    "requestTime": "Dec 23, 2021 3:12:16 PM"
+  },
+  {
+    "date": "Dec 23, 2021 3:12:17 PM",
+    "idTransaction": "0924464886oG9m5TY0uo5cNyYK2C6",
+    "calling": "84909481369",
+    "typeCall": "USSD",
+    "desc": "*100*027520040784# \u003d\u003d\u003e TK chinh cua quy khach co 101363 VND.",
+    "requestTime": "Dec 23, 2021 3:12:17 PM"
+  }
+]
